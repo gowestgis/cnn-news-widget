@@ -80,17 +80,21 @@
           const div = document.createElement("div");
           div.className = "news-item";
 
-          const thumbnail = item.thumbnail || "https://via.placeholder.com/300x160?text=No+Image";
+          let thumbnail = item.thumbnail
+            || (item.enclosure && item.enclosure.link)
+            || (item["media:content"] && item["media:content"].url)
+            || null;
 
           div.innerHTML = `
             <a href="${item.link}" target="_blank" rel="noopener">
-              <img src="${thumbnail}" alt="" class="news-thumb"/>
+              ${thumbnail ? `<img src="${thumbnail}" alt="" class="news-thumb"/>` : ''}
               <div class="news-content">
                 <h3 class="news-title">${item.title}</h3>
                 <p class="news-description">${item.description ? item.description.substring(0, 100) + "…" : ""}</p>
               </div>
             </a>
           `;
+
           feed.appendChild(div);
         });
       })
