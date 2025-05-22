@@ -1,29 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>CNN Top Stories</title>
+  <meta charset="UTF-8" />
+  <title>CNN News Feed</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      background-color: #f9f9f9;
-      padding: 10px;
-    }
-    h2 {
-      font-size: 20px;
-      color: #cc0000;
-    }
-    .news-item {
-      margin-bottom: 10px;
-    }
-    a {
-      color: #00457c;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+    body { font-family: Arial, sans-serif; padding: 1em; }
+    h2 { color: #cc0000; }
+    #feed div { margin-bottom: 1em; }
+    a { text-decoration: none; color: #0066cc; }
+    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -32,22 +17,28 @@
 
   <script>
     const feedUrl = encodeURIComponent("http://rss.cnn.com/rss/cnn_topstories.rss");
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`;
 
-    fetch(`https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`)
+    fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
         const feed = document.getElementById("feed");
         feed.innerHTML = "";
+
+        if (data.status !== "ok") {
+          feed.innerHTML = "Failed to load news.";
+          return;
+        }
+
         data.items.slice(0, 5).forEach(item => {
-          const div = document.createElement("div");
-          div.className = "news-item";
-          div.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
-          feed.appendChild(div);
+          const newsItem = document.createElement("div");
+          newsItem.innerHTML = `<a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>`;
+          feed.appendChild(newsItem);
         });
       })
       .catch(err => {
         document.getElementById("feed").innerHTML = "Unable to load CNN news at this time.";
-        console.error(err);
+        console.error("Fetch error:", err);
       });
   </script>
 </body>
