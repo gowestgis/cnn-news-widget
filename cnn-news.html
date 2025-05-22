@@ -57,11 +57,11 @@
 </style>
 </head>
 <body>
-  <h2>📰 CNN US News</h2>
+  <h2>📰 AP News Feed</h2>
   <div id="feed">Loading news...</div>
 
   <script>
-    const feedUrl = encodeURIComponent("http://rss.cnn.com/rss/cnn_us.rss");
+    const feedUrl = encodeURIComponent("https://apnews.com/rss/");
     const apiKey = 'ssgvwzlbryrljp2t7gdgo2qefzmsjuj0xxppqoq6';
     const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}&api_key=${apiKey}`;
 
