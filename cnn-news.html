@@ -40,6 +40,7 @@
       .catch(err => {
         document.getElementById("feed").innerHTML = "Unable to load CNN news at this time.";
         console.error("Fetch error:", err);
+        console.log("Fetching RSS feed from:", apiUrl);
       });
   </script>
 </body>
