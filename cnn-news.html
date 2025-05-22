@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Google News Magazine Style</title>
+<title>CNN Latest News Magazine Style</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -57,11 +57,11 @@
 </style>
 </head>
 <body>
-  <h2>📰 Google News Feed</h2>
+  <h2>📰 CNN Latest News Feed</h2>
   <div id="feed">Loading news...</div>
 
   <script>
-    const feedUrl = encodeURIComponent("https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en");
+    const feedUrl = encodeURIComponent("http://rss.cnn.com/rss/cnn_topstories.rss");
     const apiKey = 'ssgvwzlbryrljp2t7gdgo2qefzmsjuj0xxppqoq6';
     const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}&api_key=${apiKey}`;
 
